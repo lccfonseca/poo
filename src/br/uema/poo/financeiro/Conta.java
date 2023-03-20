@@ -20,17 +20,17 @@ public class Conta {
 
     private Operacao busca(){
         Operacao p = operacoes;
-        while (p.proxima != null) p = p.proxima;
+        while (p.getProxima() != null) p = p.getProxima();
         return p;
     }
 
     public void movimentacao(char tipo, float valor){
-        Operacao novo = new Operacao(tipo, valor);
+        Operacao novo = new Operacao(tipo, "", valor);
         if (operacoes == null){
             this.operacoes = novo;
         } else {
             Operacao ultimo = busca();
-            ultimo.proxima = novo;
+            ultimo.setProxima(novo);
         }
         saldo = tipo == 'c' ? saldo + valor : saldo - valor;
     }
@@ -39,8 +39,8 @@ public class Conta {
         Operacao p = this.operacoes;
         System.out.println("------------");
         while (p != null){
-            System.out.println(p.tipo + " : R$ " + p.valor);
-            p = p.proxima;
+            System.out.println(p.getTipo() + " : R$ " + p.getValor());
+            p = p.getProxima();
         }
         System.out.println("------------");
         System.out.println(this.saldo);

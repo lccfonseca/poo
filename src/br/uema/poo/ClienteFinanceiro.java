@@ -7,17 +7,23 @@ public class ClienteFinanceiro {
 
     String nome = "Projeto 1";
 
+    // Tarefa 01:
+    // Implemente uma interface para as operações de:
+    // Saldo, Extrato, Saque e Tranferencia
+    // Sugestão, criar a classe Banco para manipular as varias contas
+
+
     public static void main(String[] args) throws Exception {
         
-        Conta cc = new Conta("Felipe", "0001", "1234");
+        Conta cc1 = new Conta("Felipe", "0001", "1234");
 
-        cc.extrato();
+        cc1.extrato();
 
-        cc.movimentacao('c', 100);
-        cc.movimentacao('c', 200);
-        cc.movimentacao('d', 50);
+        cc1.movimentacao('c', 100);
+        cc1.movimentacao('c', 200);
+        cc1.movimentacao('d', 50);
 
-        cc.extrato();
+        cc1.extrato();
         
     }
     
