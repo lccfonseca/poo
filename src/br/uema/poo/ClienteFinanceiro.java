@@ -1,30 +1,35 @@
 package br.uema.poo;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import br.uema.poo.financeiro.CaixaEletronico;
 import br.uema.poo.financeiro.Conta;
-import br.uema.poo.geometria.Ponto;
 
 public class ClienteFinanceiro {
 
     String nome = "Projeto 1";
 
-    // Tarefa 01:
-    // Implemente uma interface para as operações de:
-    // Saldo, Extrato, Saque e Tranferencia
-    // Sugestão, criar a classe Banco para manipular as varias contas
-
-
     public static void main(String[] args) throws Exception {
-        
-        Conta cc1 = new Conta("Felipe", "0001", "1234");
 
-        cc1.extrato();
+        CaixaEletronico ce = new CaixaEletronico();
 
-        cc1.movimentacao('c', 100);
-        cc1.movimentacao('c', 200);
-        cc1.movimentacao('d', 50);
+        ce.addConta(new Conta("Felipe", "0001", "1234"));
+        ce.addConta(new Conta("Luis Carlos", "0001", "4321"));
+        ce.addConta(new Conta("Daniel", "0001", "2211"));
 
-        cc1.extrato();
-        
+        int op;
+        while ((op = ce.menu()) != 0) {
+            switch (op) {
+                case 1:
+                    ce.saldo();
+                    break;
+                default:
+                    break;
+            }
+        }
+
     }
-    
+
 }

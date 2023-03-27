@@ -2,13 +2,13 @@ package br.uema.poo.financeiro;
 
 public class Conta {
     
-    String nome;
-    String agencia;
-    String conta;
+    private String nome;
+    private String agencia;
+    private String conta;
 
-    Operacao operacoes = null;
+    private Operacao operacoes = null;
 
-    float saldo;
+    private float saldo;
 
     public Conta(String nome, String agencia, String conta){
         this.nome = nome;
@@ -47,5 +47,16 @@ public class Conta {
         System.out.println("------------");
     }
 
+    public String getConta() {
+        return conta;
+    }
+
+    public void setConta(String conta) {
+        this.conta = conta;
+    }
+
+    public float getSaldo() {
+        return saldo;
+    }
 
 }
