@@ -50,7 +50,6 @@ public class CaixaEletronico {
     public final static void clearConsole() {
         try {
             final String os = System.getProperty("os.name");
-
             if (os.contains("win")) {
                 Runtime.getRuntime().exec("cls");
             } else {
