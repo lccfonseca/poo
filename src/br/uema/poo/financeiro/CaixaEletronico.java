@@ -47,13 +47,38 @@ public class CaixaEletronico {
         return op;
     }
 
+    public void executa() {
+        int op;
+        while ((op = this.menu()) != 0) {
+            switch (op) {
+                case 1:
+                    this.saldo();
+                    break;
+                case 2:
+                    this.extrato();
+                    break;
+                case 3:
+                    this.saque();
+                    break;
+                case 4:
+                    this.transferencia();
+                    break;
+                case 5:
+                    this.deposito();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
     public final static void clearConsole() {
         try {
             final String os = System.getProperty("os.name");
-            if (os.contains("win")) {
-                Runtime.getRuntime().exec("cls");
-            } else {
+            if (os.contains("Linux")) {
                 Runtime.getRuntime().exec("clear");
+            } else {
+                Runtime.getRuntime().exec("cls");
             }
         } catch (final Exception e) {
             // Handle any exceptions.
@@ -68,6 +93,16 @@ public class CaixaEletronico {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public float lerValor() {
+        try {
+            float conta = scanner.nextFloat();
+            return conta;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     public Conta buscar() {
@@ -88,7 +123,40 @@ public class CaixaEletronico {
         } else {
             System.out.println("Conta não encontrada!");
         }
-        
+
+    }
+
+    public void saque() {
+        System.out.println("Método ainda não implementado!");
+        // Buscar a conta
+        // Pedir o valor
+        // Operação de debito na conta
+    }
+
+    public void transferencia() {
+        System.out.println("Método ainda não implementado!");
+        // Pedir a conta de origem
+        // Pedir a conta de destino
+        // Duas operações uma de debito e outra de credito
+    }
+
+    public void extrato() {
+        Conta ct = buscar();
+        if (ct != null) {
+            ct.extrato();
+        } else {
+            System.out.println("Conta não encontrada!");
+        }
+    }
+
+    public void deposito() {
+        Conta ct = buscar();
+        if (ct != null) {
+            System.out.println("Informe o valor (separado por .):");
+            ct.movimentacao('c', lerValor());
+        } else {
+            System.out.println("Conta não encontrada!");
+        }
     }
 
     static {

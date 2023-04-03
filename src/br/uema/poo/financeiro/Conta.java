@@ -37,14 +37,14 @@ public class Conta {
 
     public void extrato(){
         Operacao p = this.operacoes;
-        System.out.println("------------");
+        System.out.println("------ Extrado ------");
         while (p != null){
             System.out.println(p.getTipo() + " : R$ " + p.getValor());
             p = p.getProxima();
         }
-        System.out.println("------------");
+        System.out.println("------ ------- ------");
         System.out.println(this.saldo);
-        System.out.println("------------");
+        System.out.println("------ ------- ------");
     }
 
     public String getConta() {
