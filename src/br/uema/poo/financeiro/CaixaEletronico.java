@@ -130,12 +130,16 @@ public class CaixaEletronico {
 
         Conta conta = buscar();
         float valor = lerValor();
+
+        if(conta==null) System.out.println("Conta não encontrada") return;
+
         if (conta.getSaldo() < valor) {
             System.out.println("Saldo insuficiente");
             return;
         }
         conta.movimentacao('d', valor);
         System.out.printf("O novo saldo é %f", conta.getSaldo());
+
     }
 
 
