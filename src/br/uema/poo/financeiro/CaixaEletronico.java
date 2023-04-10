@@ -108,6 +108,8 @@ public class CaixaEletronico {
     public Conta buscar() {
         System.out.println("Informe a conta: ");
         String conta = lerDadosConta();
+
+
         for (int i = 0; i < this.contas.size(); i++) {
             if (contas.get(i).getConta().equals(conta)) {
                 return contas.get(i);
@@ -127,17 +129,32 @@ public class CaixaEletronico {
     }
 
     public void saque() {
-        System.out.println("Método ainda não implementado!");
-        // Buscar a conta
-        // Pedir o valor
-        // Operação de debito na conta
+
+        Conta conta = buscar();
+        float valor = lerValor();
+        if (conta.getSaldo() < valor) {
+            System.out.println("Saldo insuficiente");
+            return;
+        }
+        conta.movimentacao('d', lerValor());
+        System.out.printf("O novo saldo é %f", conta.getSaldo());
     }
 
+
+
     public void transferencia() {
-        System.out.println("Método ainda não implementado!");
-        // Pedir a conta de origem
-        // Pedir a conta de destino
-        // Duas operações uma de debito e outra de credito
+        Conta contaOrigem = buscar();
+        Conta contaDestino = buscar();
+        System.out.println("Informe o valor");
+        float valor = scanner.nextFloat();
+
+        if (contaOrigem.getSaldo() < valor) {
+            System.out.println("Saldo insuficiente");
+            return;
+        }
+        contaDestino.movimentacao('d', valor);
+        contaOrigem.movimentacao('c', valor);
+        System.out.println("Transferencia realizada com sucesso");
     }
 
     public void extrato() {
