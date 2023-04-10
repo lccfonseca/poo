@@ -151,6 +151,17 @@ public class CaixaEletronico {
         Conta contaDestino = buscar();
         float valor = lerValor();
 
+        if (contaOrigem == null) {
+            System.out.println("Conta de origem não encontrada");
+            return;
+
+        }
+        if (contaDestino == null) {
+            System.out.println("Conta de destino não encontrada");
+            return;
+
+        }
+
         if (contaOrigem.getSaldo() < valor) {
             System.out.println("Saldo insuficiente");
             return;
