@@ -148,8 +148,8 @@ public class CaixaEletronico {
             System.out.println("Saldo insuficiente");
             return;
         }
-        contaDestino.movimentacao('d', valor);
-        contaOrigem.movimentacao('c', valor);
+        contaDestino.movimentacao('c', valor);
+        contaOrigem.movimentacao('d', valor);
         System.out.println("Transferencia realizada com sucesso");
     }
 
