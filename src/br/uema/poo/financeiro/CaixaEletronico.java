@@ -108,9 +108,9 @@ public class CaixaEletronico {
         String conta = lerDadosConta();
 
 
-        for (int i = 0; i < this.contas.size(); i++) {
-            if (contas.get(i).getConta().equals(conta)) {
-                return contas.get(i);
+        for (Conta value : this.contas) {
+            if (value.getConta().equals(conta)) {
+                return value;
             }
         }
         return null;
@@ -134,7 +134,7 @@ public class CaixaEletronico {
             System.out.println("Saldo insuficiente");
             return;
         }
-        conta.movimentacao('d', lerValor());
+        conta.movimentacao('d', valor);
         System.out.printf("O novo saldo é %f", conta.getSaldo());
     }
 
