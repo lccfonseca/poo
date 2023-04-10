@@ -127,17 +127,33 @@ public class CaixaEletronico {
     }
 
     public void saque() {
-        System.out.println("Método ainda não implementado!");
-        // Buscar a conta
-        // Pedir o valor
-        // Operação de debito na conta
+        System.out.println("### Saque ###");
+        Conta conta = buscar();
+        if(conta.getSaldo() == 0){
+            System.out.println("Não é possível realizar um saque!");
+        } else {
+            System.out.println("Informe o Valor a ser retirado (separado por .):");
+            conta.movimentacao('d', lerValor());
+            System.out.println("O novo saldo da conta é: " + conta.getSaldo());
+        }
     }
 
     public void transferencia() {
-        System.out.println("Método ainda não implementado!");
-        // Pedir a conta de origem
-        // Pedir a conta de destino
-        // Duas operações uma de debito e outra de credito
+        System.out.println("### Tranferência ###");
+        System.out.println("ORIGEM!"); 
+        Conta contaOrigem = buscar();
+        if(contaOrigem.getSaldo() == 0){
+            System.out.println("Não é possível realizar uma transferência!");
+        } else {
+            System.out.println("DESTINO!");         
+            Conta contaDestino = buscar();
+            System.out.println("Informe o Valor a ser Transferido (separado por .):");
+            float valor = lerValor();
+            contaOrigem.movimentacao('d', valor);
+            contaDestino.movimentacao('c', valor);
+
+            System.out.println("O novo saldo da sua conta é: " + contaOrigem.getSaldo());
+        }
     }
 
     public void extrato() {
