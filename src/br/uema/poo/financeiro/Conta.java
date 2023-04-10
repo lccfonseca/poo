@@ -37,7 +37,7 @@ public class Conta {
 
     public void extrato(){
         Operacao p = this.operacoes;
-        System.out.println("------ Extrado ------");
+        System.out.println("------ Extrato ------");
         while (p != null){
             System.out.println(p.getTipo() + " : R$ " + p.getValor());
             p = p.getProxima();

@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class CaixaEletronico {
 
-    List<Conta> contas;
+    private List<Conta> contas;
 
     private static Scanner scanner;
 
@@ -87,8 +87,7 @@ public class CaixaEletronico {
 
     public String lerDadosConta() {
         try {
-            String conta = scanner.next();
-            return conta;
+            return scanner.next();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -97,8 +96,7 @@ public class CaixaEletronico {
 
     public float lerValor() {
         try {
-            float conta = scanner.nextFloat();
-            return conta;
+            return scanner.nextFloat();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -141,12 +139,10 @@ public class CaixaEletronico {
     }
 
 
-
     public void transferencia() {
         Conta contaOrigem = buscar();
         Conta contaDestino = buscar();
-        System.out.println("Informe o valor");
-        float valor = scanner.nextFloat();
+        float valor = lerValor();
 
         if (contaOrigem.getSaldo() < valor) {
             System.out.println("Saldo insuficiente");
