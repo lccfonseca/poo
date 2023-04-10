@@ -127,10 +127,14 @@ public class CaixaEletronico {
     }
 
     public void saque() {
-        System.out.println("Método ainda não implementado!");
-        // Buscar a conta
-        // Pedir o valor
-        // Operação de debito na conta
+        System.out.println("### Saque ###");
+        Conta ct = buscar();
+        if (ct != null){
+            System.out.println("Informe o valor (separado por .):");
+            ct.movimentacao('d', lerValor());
+        } else {
+            System.out.println("Conta não encontrada!");
+        }
     }
 
     public void transferencia() {
