@@ -1,9 +1,13 @@
 package br.uema.poo.financeiro;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
+
+import br.uema.db.SQLiteJDBCDriverConnection;
 
 public class CaixaEletronico {
 
@@ -11,8 +15,47 @@ public class CaixaEletronico {
 
     private static Scanner scanner;
 
+    private SQLiteJDBCDriverConnection db;
+
     public CaixaEletronico() {
         this.contas = new ArrayList<>();
+        this.db = new SQLiteJDBCDriverConnection();
+        this.db.connect();
+    }
+
+    public void initDB() {
+        try {
+            // Remove e cria a tabela a cada execução. Mero exemplo
+            // this.statement.executeUpdate("DROP TABLE IF EXISTS pessoas");
+
+            this.db
+                    .getStatement()
+                    .executeUpdate("CREATE TABLE IF NOT EXISTS contas ("
+                            + "nome varchar(70) NOT NULL,"
+                            + "agencia varchar(8), "
+                            + "conta varchar(10) PRIMARY KEY NOT NULL, "
+                            + "saldo real);");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadDB() {
+        try {
+            ResultSet rs = this.db
+                    .getStatement()
+                    .executeQuery("SELECT * FROM contas;");
+            while (rs.next()){
+                this.addConta(
+                    new Conta(
+                        rs.getString("nome"),
+                        rs.getString("agencia"),
+                        rs.getString("conta"),
+                        rs.getFloat("saldo")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<Conta> getContas() {
@@ -129,7 +172,7 @@ public class CaixaEletronico {
     public void saque() {
         System.out.println("### Saque ###");
         Conta conta = buscar();
-        if(conta.getSaldo() == 0){
+        if (conta.getSaldo() == 0) {
             System.out.println("Não é possível realizar um saque!");
         } else {
             System.out.println("Informe o Valor a ser retirado (separado por .):");
@@ -140,12 +183,12 @@ public class CaixaEletronico {
 
     public void transferencia() {
         System.out.println("### Tranferência ###");
-        System.out.println("ORIGEM!"); 
+        System.out.println("ORIGEM!");
         Conta contaOrigem = buscar();
-        if(contaOrigem.getSaldo() == 0){
+        if (contaOrigem.getSaldo() == 0) {
             System.out.println("Não é possível realizar uma transferência!");
         } else {
-            System.out.println("DESTINO!");         
+            System.out.println("DESTINO!");
             Conta contaDestino = buscar();
             System.out.println("Informe o Valor a ser Transferido (separado por .):");
             float valor = lerValor();

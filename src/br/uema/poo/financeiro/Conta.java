@@ -10,12 +10,12 @@ public class Conta {
 
     private float saldo;
 
-    public Conta(String nome, String agencia, String conta){
+    public Conta(String nome, String agencia, String conta, float saldo){
         this.nome = nome;
         this.agencia = agencia;
         this.conta = conta;
         this.operacoes = null;
-        saldo = 0;
+        this.saldo = saldo;
     }
 
     private Operacao busca(){
