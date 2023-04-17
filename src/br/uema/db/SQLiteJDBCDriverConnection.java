@@ -43,6 +43,10 @@ public class SQLiteJDBCDriverConnection {
 		}  
 	}
 
+    public Connection getConnection() {
+        return connection;
+    }
+
     public Statement getStatement() {
         return statement;
     }

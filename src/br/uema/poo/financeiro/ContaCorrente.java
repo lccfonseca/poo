@@ -6,7 +6,7 @@ public class ContaCorrente extends Conta {
     private float taxa_juros;
 
     public ContaCorrente(String nome, String agencia, String conta) {
-        super(nome, agencia, conta);
+        super(nome, agencia, conta, 0);
         //TODO Auto-generated constructor stub
     }
 
