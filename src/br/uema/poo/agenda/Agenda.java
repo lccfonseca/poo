@@ -79,6 +79,16 @@ public class Agenda {
         return "";
     }
 
+    private int lerInt(){
+        try{
+            int num = scanner.nextInt();
+            return num;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
     private Contatos lerContatos() {
         System.out.println("Informe o nome: ");
         String nome = lerString();
@@ -105,11 +115,36 @@ public class Agenda {
     }
 
     public void alterar(Contatos c){
-        String sql = "UPDATE contatos SET nome = ?, telefone = ?, email = ? WHERE id = ?;";
+        System.out.print("Id do contato a ser atualizado: ");
+        int id = lerInt();
+        
+        try{
+            String sql = "UPDATE contatos SET nome = ?, telefone = ?, email = ? WHERE id = ?;";
+            PreparedStatement ps = db.getConnection().prepareStatement(sql);
+            ps.setString(1, c.getNome());
+            ps.setString(2, c.getTelefone());
+            ps.setString(3, c.getEmail());
+            ps.setInt(4,id);            
+            ps.executeUpdate();
+            System.out.println("Contato Atualizado!");
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 
-    public void apagar(Contatos c){
-        String sql = "DELETE FROM contatos WHERE id = ?;";
+    public void apagar(){
+        System.out.print("Id do contato a ser deletado: ");
+        int id = lerInt();
+        try{
+            String sql = "DELETE FROM contatos WHERE id = ?;";
+            PreparedStatement ps = db.getConnection().prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            System.out.println("Contato deletado!");
+        }catch(SQLException e){
+            System.err.println(e.getMessage());
+        }
+        
     }
 
     public void executa() {
@@ -123,10 +158,10 @@ public class Agenda {
                     this.incluir(lerContatos());
                     break;
                 case 3:
-                    // this.alterar();
+                    this.alterar(lerContatos());
                     break;
                 case 4:
-                    // this.apagar();
+                    this.apagar();
                     break;
                 default:
                     break;
